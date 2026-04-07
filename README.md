@@ -1,32 +1,46 @@
-# Dotfiles (stow-ready)
+# dotfiles
 
-Questa cartella contiene una copia del setup attuale, organizzata per GNU Stow.
+My personal configuration files for nvim, tmux, and ghostty. Managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
-Pacchetti inclusi:
-- nvim -> ~/.config/nvim
-- ghostty -> ~/.config/ghostty
-- tmux -> ~/.tmux.conf
-- zsh -> ~/.zshrc
-- vscode -> ~/Library/Application Support/Code/User/settings.json
+## Structure
 
-## A cosa serve stow
-Stow crea symlink dai file nella cartella dotfiles verso la tua home.
-In pratica mantieni tutto versionato in un solo posto e lo applichi con un comando.
+```bash
+dotfiles/
+├── nvim/.config/nvim/
+├── tmux/.tmux.conf
+└── ghostty/.config/ghostty/config
+```
 
-## Installazione
+## Requirements
+
+```bash
 brew install stow
+```
 
-## Applicare tutto
-cd ~/config-dotfiles
-stow nvim ghostty tmux zsh vscode -t ~
+## Installation
 
-## Applicare solo un pacchetto
-stow nvim -t ~
-stow tmux -t ~
+```bash
+git clone https://github.com/vossenwout/pookie-dotfiles.git ~/dotfiles
+cd ~/dotfiles
+stow neovim
+stow tmux
+stow ghostty
+```
 
-## Rimuovere i symlink di un pacchetto
-stow -D nvim -t ~
+This creates symlinks from the expected config locations to the files in this repo.
 
-## Nota sui conflitti
-Se i file target esistono gia come file reali (non symlink), stow segnala conflitto.
-In quel caso sposta/backuppa i file esistenti e rilancia il comando.
+## Adding a new config
+
+1. Move the config file/folder into the dotfiles repo, mirroring the home directory structure
+2. Run `stow <package>` to create the symlink
+3. Commit and push
+
+## Keeping in sync
+
+```bash
+# pull latest changes
+cd ~/dotfiles && git pull
+
+# push changes after editing configs
+cd ~/dotfiles && git add . && git commit -m "update" && git push
+```
