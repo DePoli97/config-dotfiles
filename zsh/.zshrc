@@ -105,8 +105,22 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Plain prompt with high contrast and a simple right-side clock.
-PROMPT='%F{81}%n@%m%f %F{228}%~%f %# '
+# Plain prompt with high contrast, git branch info, and a simple right-side clock.
+setopt PROMPT_SUBST
+
+git_branch_prompt() {
+    local branch dirty
+    branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) || return
+    git diff --quiet --ignore-submodules HEAD 2>/dev/null
+    if [[ $? -eq 0 ]]; then
+        dirty=''
+    else
+        dirty='*'
+    fi
+    echo " %F{39}(${branch}${dirty})%f"
+}
+
+PROMPT='%F{81}%n@%m%f %F{228}%~%f$(git_branch_prompt) %# '
 RPROMPT='%F{245}%*%f'
 
 # exports
