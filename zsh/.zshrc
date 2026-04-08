@@ -150,7 +150,8 @@ export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH=$PATH:$HOME/Downloads/pulp-riscv-gnu-toolchain/install/bin
 export PATH="/opt/homebrew/bin:$PATH"
 
-# Auto-start tmux for local interactive shells to keep a persistent bottom status bar.
-if [[ -o interactive && -z "$TMUX" && -z "$SSH_CONNECTION" && "${AUTO_TMUX:-1}" == "1" ]]; then
-    tmux new-session -A -s main
+# Auto-start tmux only in Ghostty local interactive shells.
+# Each new Ghostty shell gets its own tmux session (no auto-attach to a shared session).
+if [[ -o interactive && -z "$TMUX" && -z "$SSH_CONNECTION" && "${AUTO_TMUX:-1}" == "1" && "$TERM_PROGRAM" == "ghostty" ]]; then
+    tmux new-session
 fi
