@@ -173,7 +173,7 @@ output=$(printf "  %s |   %s | 󰢮  %s | 󰍛  %s |   %s |   %s" \
 
 # tmux status format parses '%' tokens; escape them only when running inside tmux.
 if [[ -n "${TMUX:-}" ]]; then
-  output=${output//%/%%}
+  output=${output//%/%}
 fi
 
 printf "%s" "$output"
