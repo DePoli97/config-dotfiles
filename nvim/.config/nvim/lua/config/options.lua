@@ -4,6 +4,8 @@
 vim.opt.exrc = true
 vim.opt.secure = true
 vim.opt.cursorline = false
+vim.opt.wrap = true
+vim.opt.linebreak = true
 vim.opt.formatoptions:remove({ "c", "r", "o" })
 
 if vim.env.SSH_CONNECTION then

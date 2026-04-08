@@ -2,6 +2,7 @@
     "editor.smoothScrolling": false,
     "workbench.startupEditor": "none",
     "editor.lineNumbers": "relative",
+    "editor.wordWrap": "on",
     "terminal.integrated.inheritEnv": false,
     "diffEditor.ignoreTrimWhitespace": true,
     "github.copilot.enable": {
@@ -151,7 +152,6 @@
     "editor.unicodeHighlight.allowedCharacters": {
       "’": true
     },
-    "chat.viewSessions.orientation": "stacked",
     "git.confirmSync": false,
     "extensions.experimental.affinity": {
       "asvetliakov.vscode-neovim": 1
@@ -165,5 +165,6 @@
       "https://ghostty.org/docs/config/reference": true,
       "https://ghostty.org/docs/config": true,
       "https://ghostty.org/docs": true
-    }
+    },
+    "chat.viewSessions.orientation": "stacked"
 }
