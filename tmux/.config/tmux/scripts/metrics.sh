@@ -62,4 +62,4 @@ if [[ "$temp" == "N/A" ]]; then
   temp="--"
 fi
 
-printf " %s%% |  %s%% |  %s | T:%s" "$cpu_pct" "$ram_pct" "$temp" "$therm_state"
+printf " %s%% |  %s%% |  %s %s" "$cpu_pct" "$ram_pct" "$temp" "$therm_state"
