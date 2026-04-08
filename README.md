@@ -1,14 +1,16 @@
 # dotfiles
 
-My personal configuration files for nvim, tmux, and ghostty. Managed with [GNU Stow](https://www.gnu.org/software/stow/).
+My personal configuration files for nvim, tmux, ghostty, zsh, and VS Code. Managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Structure
 
 ```bash
-dotfiles/
+config-dotfiles/
 ├── nvim/.config/nvim/
 ├── tmux/.tmux.conf
-└── ghostty/.config/ghostty/config
+├── ghostty/.config/ghostty/config
+├── zsh/.zshrc
+└── vscode/Library/Application Support/Code/User/settings.json
 ```
 
 ## Requirements
@@ -20,27 +22,16 @@ brew install stow
 ## Installation
 
 ```bash
-git clone https://github.com/vossenwout/pookie-dotfiles.git ~/dotfiles
-cd ~/dotfiles
-stow neovim
-stow tmux
-stow ghostty
+cd ~
+git clone https://github.com/paolodeidda/config-dotfiles.git
+cd ~/config-dotfiles
+stow -t ~ nvim tmux ghostty zsh vscode
 ```
 
 This creates symlinks from the expected config locations to the files in this repo.
 
-## Adding a new config
+## How Stow maps paths
 
-1. Move the config file/folder into the dotfiles repo, mirroring the home directory structure
-2. Run `stow <package>` to create the symlink
-3. Commit and push
-
-## Keeping in sync
-
-```bash
-# pull latest changes
-cd ~/dotfiles && git pull
-
-# push changes after editing configs
-cd ~/dotfiles && git add . && git commit -m "update" && git push
-```
+- Stow mirrors each package path into the target.
+- Example: `vscode/Library/Application Support/Code/User/settings.json` becomes `~/Library/Application Support/Code/User/settings.json`.
+- The created item in home is a symlink that points back to this repository from one level higher in the directory structure.
