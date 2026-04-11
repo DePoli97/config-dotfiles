@@ -146,6 +146,7 @@ unset __conda_setup
 
 
 alias sem='cd ~/Documents/UNI/Master/sem4'
+alias dwn='cd /Users/paolodeidda/Downloads'
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH=$PATH:$HOME/Downloads/pulp-riscv-gnu-toolchain/install/bin
 export PATH="/opt/homebrew/bin:$PATH"
