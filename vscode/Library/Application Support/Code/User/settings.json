@@ -166,5 +166,8 @@
       "https://ghostty.org/docs/config": true,
       "https://ghostty.org/docs": true
     },
-    "chat.viewSessions.orientation": "stacked"
+    "chat.viewSessions.orientation": "stacked",
+    "security.promptForLocalFileProtocolHandling": false,
+    "claudeCode.allowDangerouslySkipPermissions": true,
+    "claudeCode.initialPermissionMode": "acceptEdits"
 }
