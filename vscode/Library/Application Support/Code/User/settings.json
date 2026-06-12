@@ -29,7 +29,8 @@
     "security.workspace.trust.untrustedFiles": "open",
     "workbench.editorAssociations": {
       "*.copilotmd": "vscode.markdown.preview.editor",
-      "*.txt": "default"
+      "*.txt": "default",
+      "*.pdf": "pdf.preview"
     },
     "terminal.integrated.commandsToSkipShell": [
       "matlab.interrupt"
@@ -166,8 +167,9 @@
       "https://ghostty.org/docs/config": true,
       "https://ghostty.org/docs": true
     },
-    "chat.viewSessions.orientation": "stacked",
     "security.promptForLocalFileProtocolHandling": false,
     "claudeCode.allowDangerouslySkipPermissions": true,
-    "claudeCode.initialPermissionMode": "acceptEdits"
+    "claudeCode.initialPermissionMode": "acceptEdits",
+    "workbench.colorTheme": "Visual Studio Dark - C++",
+    "latex-workshop.view.pdf.viewer": "browser"
 }

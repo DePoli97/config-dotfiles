@@ -147,6 +147,7 @@ unset __conda_setup
 
 alias sem='cd ~/Documents/UNI/Master/sem4'
 alias dwn='cd /Users/paolodeidda/Downloads'
+alias tesi='cd ~/Documents/UNI/Master/Tesi/adversarial-patch-vehicle/'
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH=$PATH:$HOME/Downloads/pulp-riscv-gnu-toolchain/install/bin
 export PATH="/opt/homebrew/bin:$PATH"
@@ -156,3 +157,22 @@ export PATH="/opt/homebrew/bin:$PATH"
 if [[ -o interactive && -z "$TMUX" && -z "$SSH_CONNECTION" && "${AUTO_TMUX:-1}" == "1" && "$TERM_PROGRAM" == "ghostty" ]]; then
     tmux new-session
 fi
+
+
+
+ex-test() {
+  cmake -S . -B build -DEXERCISM_RUN_ALL_TESTS=1 && \
+  cmake --build build && \
+  ./build/$(basename "$PWD") \
+  # exercism submit
+}
+
+
+concat() {
+  txt="../lista_audio.txt"
+  folder=$(basename "$(pwd)")
+  for f in *; do echo "file '$folder/$f'"; done > "$txt"
+  out="../unito.${f##*.}"          # nome + estensione dell'ultimo input
+  ffmpeg -f concat -safe 0 -i "$txt" -c copy "$out"
+  rm "$txt"
+}
