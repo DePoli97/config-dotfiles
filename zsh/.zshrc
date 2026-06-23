@@ -120,7 +120,8 @@ git_branch_prompt() {
     echo " %F{39}(${branch}${dirty})%f"
 }
 
-PROMPT='%F{81}%n@%m%f %F{228}%~%f$(git_branch_prompt) %# '
+PROMPT='%F{228}%~%f$(git_branch_prompt)
+%F{81}%n@%m%f %# '
 RPROMPT='%F{245}%*%f'
 
 # exports
@@ -176,3 +177,4 @@ concat() {
   ffmpeg -f concat -safe 0 -i "$txt" -c copy "$out"
   rm "$txt"
 }
+export PATH="$HOME/.local/bin:$PATH"

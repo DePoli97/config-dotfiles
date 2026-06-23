@@ -170,6 +170,7 @@
     "security.promptForLocalFileProtocolHandling": false,
     "claudeCode.allowDangerouslySkipPermissions": true,
     "claudeCode.initialPermissionMode": "acceptEdits",
-    "workbench.colorTheme": "Visual Studio Dark - C++",
-    "latex-workshop.view.pdf.viewer": "browser"
+    "workbench.colorTheme": "Visual Studio 2017 Light - C++",
+    "latex-workshop.view.pdf.viewer": "browser",
+    "chat.viewSessions.orientation": "stacked"
 }
