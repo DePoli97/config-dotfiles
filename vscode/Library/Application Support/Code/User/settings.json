@@ -5,12 +5,6 @@
     "editor.wordWrap": "on",
     "terminal.integrated.inheritEnv": false,
     "diffEditor.ignoreTrimWhitespace": true,
-    "github.copilot.enable": {
-      "*": true,
-      "plaintext": false,
-      "markdown": true,
-      "scminput": false
-    },
     "[latex]": {
       "editor.defaultFormatter": "mathematic.vscode-latex"
     },
@@ -170,7 +164,18 @@
     "security.promptForLocalFileProtocolHandling": false,
     "claudeCode.allowDangerouslySkipPermissions": true,
     "claudeCode.initialPermissionMode": "acceptEdits",
-    "workbench.colorTheme": "Visual Studio 2017 Light - C++",
+    "workbench.colorTheme": "Claude Dark Plus",
     "latex-workshop.view.pdf.viewer": "browser",
-    "chat.viewSessions.orientation": "stacked"
+    "chat.viewSessions.orientation": "stacked",
+    "[markdown]": {
+      "diffEditor.ignoreTrimWhitespace": true
+    },
+    "github.copilot.enable": {
+      "*": true,
+      "plaintext": false,
+      "markdown": true,
+      "scminput": false,
+      "cuda-cpp": true,
+      "python": true
+    }
 }
