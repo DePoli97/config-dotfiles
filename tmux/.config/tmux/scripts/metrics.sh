@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Cross-platform tmux status metrics (macOS + Linux).
-# Output format: used/total (pct) for CPU, RAM, VRAM.
+# Output format: used/total (pct) for CPU and RAM.
 
 set -u
 
@@ -12,10 +12,6 @@ cpu_total="--"
 ram_pct="--"
 ram_used_gb="--"
 ram_total_gb="--"
-
-vram_pct="--"
-vram_used="--"
-vram_total="--"
 
 os_name="$(uname -s 2>/dev/null || echo unknown)"
 
@@ -47,13 +43,6 @@ if [[ "$os_name" == "Darwin" ]]; then
     ram_total_gb="$(awk -v b="$mem_total_bytes" 'BEGIN {printf "%.1f", b/1073741824}')"
   fi
 
-  # On unified memory systems (Apple Silicon), VRAM mirrors RAM in used/total and %.
-  if [[ "$ram_pct" != "--" ]]; then
-    vram_pct="$ram_pct"
-    vram_used="$ram_used_gb"
-    vram_total="$ram_total_gb"
-  fi
-
 elif [[ "$os_name" == "Linux" ]]; then
   cpu_total="$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo --)"
 
@@ -80,24 +69,10 @@ elif [[ "$os_name" == "Linux" ]]; then
     ' /proc/meminfo 2>/dev/null)
   fi
 
-  # VRAM on NVIDIA if available.
-  if command -v nvidia-smi >/dev/null 2>&1; then
-    gpu_line="$(nvidia-smi --query-gpu=memory.used,memory.total --format=csv,noheader,nounits 2>/dev/null | head -n1)"
-    if [[ -n "$gpu_line" ]]; then
-      mem_used="$(echo "$gpu_line" | awk -F',' '{gsub(/ /, "", $1); print $1}')"
-      mem_total="$(echo "$gpu_line" | awk -F',' '{gsub(/ /, "", $2); print $2}')"
-      if [[ -n "$mem_used" && -n "$mem_total" && "$mem_total" != "0" ]]; then
-        vram_pct="$(awk -v u="$mem_used" -v t="$mem_total" 'BEGIN {printf "%.0f", (u/t)*100}')"
-        vram_used="$(awk -v m="$mem_used" 'BEGIN {printf "%.1f", m/1024}')"
-        vram_total="$(awk -v m="$mem_total" 'BEGIN {printf "%.1f", m/1024}')"
-      fi
-    fi
-  fi
 fi
 
 cpu_display="--/-- (--%)"
 ram_display="--/--GiB (--%)"
-vram_display="--/--GiB (--%)"
 
 if [[ "$cpu_used" != "--" && "$cpu_total" != "--" && "$cpu_pct" != "--" ]]; then
   cpu_display="${cpu_used}/${cpu_total}c (${cpu_pct}%)"
@@ -105,12 +80,9 @@ fi
 if [[ "$ram_used_gb" != "--" && "$ram_total_gb" != "--" && "$ram_pct" != "--" ]]; then
   ram_display="${ram_used_gb}/${ram_total_gb}GiB (${ram_pct}%)"
 fi
-if [[ "$vram_used" != "--" && "$vram_total" != "--" && "$vram_pct" != "--" ]]; then
-  vram_display="${vram_used}/${vram_total}GiB (${vram_pct}%)"
-fi
 
-output=$(printf "  %s |   %s | 󰍛  %s" \
-  "$cpu_display" "$ram_display" "$vram_display")
+output=$(printf "  %s |   %s" \
+  "$cpu_display" "$ram_display")
 
 # tmux status format parses '%' tokens; escape them only when running inside tmux.
 if [[ -n "${TMUX:-}" ]]; then
