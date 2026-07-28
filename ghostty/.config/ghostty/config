@@ -1,7 +1,7 @@
 font-family = "Menlo"
 theme = "Kanagawa Wave"
-background-opacity = 0.85
-background-blur = true
+background-opacity = 1
+background-blur = false
 font-size = 16
 cursor-color = #00eaff
 
