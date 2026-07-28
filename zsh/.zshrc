@@ -154,9 +154,17 @@ export PATH=$PATH:$HOME/Downloads/pulp-riscv-gnu-toolchain/install/bin
 export PATH="/opt/homebrew/bin:$PATH"
 
 # Auto-start tmux only in Ghostty local interactive shells.
-# Each new Ghostty shell gets its own tmux session (no auto-attach to a shared session).
+# Si riattacca alla sessione staccata piu' recente; se non ce n'e' nessuna, ne crea una nuova.
+# Le sessioni gia' attaccate vengono ignorate, cosi' due finestre non mostrano la stessa cosa.
 if [[ -o interactive && -z "$TMUX" && -z "$SSH_CONNECTION" && "${AUTO_TMUX:-1}" == "1" && "$TERM_PROGRAM" == "ghostty" ]]; then
-    tmux new-session
+    _tmux_session=$(tmux list-sessions -F '#{session_attached} #{session_last_attached} #{session_name}' 2>/dev/null \
+        | awk '$1 == 0' | sort -k2 -nr | head -1 | cut -d' ' -f3-)
+    if [[ -n "$_tmux_session" ]]; then
+        tmux attach-session -t "$_tmux_session"
+    else
+        tmux new-session
+    fi
+    unset _tmux_session
 fi
 
 
@@ -178,3 +186,11 @@ concat() {
   rm "$txt"
 }
 export PATH="$HOME/.local/bin:$PATH"
+
+alias work='cd /Users/paolodeidda/Documents/Work'
+
+# --- CSCS Summer School 2026 ---
+alias hpc2='cd /Users/paolodeidda/Documents/UNI/Master/sem4/HPC2'
+alias cscs='/Users/paolodeidda/Documents/UNI/Master/sem4/HPC2/mio/scripts/cscs-refresh.sh'
+# entra su daint direttamente nella scratch del corso
+alias ds='ssh -t daint "cd \$SCRATCH/SummerSchool && exec bash -l"'
