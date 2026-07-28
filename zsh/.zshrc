@@ -143,7 +143,7 @@ else
     fi
 fi
 unset __conda_setup
-# <<< conda initialize <<<export PATH="/Applications/MATLAB_R2024b.app/bin:$PATH"
+# <<< conda initialize <<<
 
 
 alias sem='cd ~/Documents/UNI/Master/sem4'

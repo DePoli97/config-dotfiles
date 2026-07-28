@@ -8,9 +8,12 @@ My personal configuration files for nvim, tmux, ghostty, zsh, and VS Code. Manag
 config-dotfiles/
 ├── nvim/.config/nvim/
 ├── tmux/.tmux.conf
+├── tmux/.config/tmux/scripts/metrics.sh
 ├── ghostty/.config/ghostty/config
+├── ghostty/.config/ghostty/shaders/cursor.glsl
 ├── zsh/.zshrc
-└── vscode/Library/Application Support/Code/User/settings.json
+├── vscode/Library/Application Support/Code/User/settings.json
+└── setup/peripherals/          # note di riferimento, non un pacchetto stow
 ```
 
 ## Requirements
@@ -23,7 +26,7 @@ brew install stow
 
 ```bash
 cd ~
-git clone https://github.com/paolodeidda/config-dotfiles.git
+git clone https://github.com/DePoli97/config-dotfiles.git
 cd ~/config-dotfiles
 stow -t ~ nvim tmux ghostty zsh vscode
 ```
