@@ -106,6 +106,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Plain prompt with high contrast and git branch info.
+# Il path usa %F{10} (bright green della palette) invece di un indice 256
+# fisso, cosi' segue il tema del terminale. user@host e il branch usano
+# ancora indici 256 (81 e 39): quelli non cambiano col tema.
 setopt PROMPT_SUBST
 
 git_branch_prompt() {
@@ -120,7 +123,7 @@ git_branch_prompt() {
     echo " %F{39}(${branch}${dirty})%f"
 }
 
-PROMPT='%F{228}%~%f$(git_branch_prompt)
+PROMPT='%F{10}%~%f$(git_branch_prompt)
 %F{81}%n@%m%f %# '
 
 # exports
