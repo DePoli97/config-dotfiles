@@ -105,7 +105,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Plain prompt with high contrast, git branch info, and a clock on the path line.
+# Plain prompt with high contrast and git branch info.
 setopt PROMPT_SUBST
 
 git_branch_prompt() {
@@ -120,25 +120,8 @@ git_branch_prompt() {
     echo " %F{39}(${branch}${dirty})%f"
 }
 
-# Orologio allineato a destra sulla riga del path.
-# RPROMPT si aggancia sempre all'ultima riga del prompt (quella del comando),
-# quindi l'orario va disegnato a mano: salva il cursore (\e7), va alla colonna
-# giusta, stampa e ripristina (\e8). Sta dentro %{...%} perche' zsh lo consideri
-# a larghezza zero e non sballi il calcolo della riga.
-_clock_right() {
-  emulate -L zsh
-  local t='%*'
-  t=${(%)t}
-  local left='%~'
-  left=${(%)left}
-  # Se il path e' cosi' lungo da arrivare sotto l'orologio, non disegnarlo.
-  (( ${#left} + ${#t} + 4 > COLUMNS )) && return
-  printf '\e7\e[%dG\e[38;5;245m%s\e[0m\e8' $(( COLUMNS - ${#t} + 1 )) "$t"
-}
-
-PROMPT='%{$(_clock_right)%}%F{228}%~%f$(git_branch_prompt)
+PROMPT='%F{228}%~%f$(git_branch_prompt)
 %F{81}%n@%m%f %# '
-RPROMPT=''
 
 # exports
 export PATH="/Users/paolodeidda/.pixi/bin:$PATH"
@@ -164,7 +147,8 @@ unset __conda_setup
 
 alias sem='cd ~/Documents/UNI/Master/sem4'
 alias dwn='cd /Users/paolodeidda/Downloads'
-alias tesi='cd ~/Documents/UNI/Master/Tesi/adversarial-patch-vehicle/'
+alias tesi='cd ~/Documents/UNI/Master/Tesi/'
+alias pms='cd ~/Documents/Work/Custodia/'
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH=$PATH:$HOME/Downloads/pulp-riscv-gnu-toolchain/install/bin
 export PATH="/opt/homebrew/bin:$PATH"
