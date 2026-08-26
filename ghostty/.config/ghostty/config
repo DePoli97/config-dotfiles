@@ -1,4 +1,4 @@
-font-family = "Andale Mono"
+font-family = "Menlo"
 theme = "Homebrew"
 # Il profilo Homebrew del Terminal.app qui ha il testo bianco, non il verde
 # #00ff00 del tema originale. Va dopo "theme": in Ghostty vince l'ultimo.
