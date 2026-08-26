@@ -1,8 +1,11 @@
-font-family = "Menlo"
+font-family = "Andale Mono"
 theme = "Homebrew"
 # Il profilo Homebrew del Terminal.app qui ha il testo bianco, non il verde
 # #00ff00 del tema originale. Va dopo "theme": in Ghostty vince l'ultimo.
 foreground = #ffffff
+# Terminal.app rende il grassetto con la variante bright della palette:
+# senza questo i verdi/ciano in bold restano spenti rispetto a lui.
+bold-color = bright
 background-opacity = 1
 background-blur = false
 font-size = 16
