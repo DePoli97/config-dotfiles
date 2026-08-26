@@ -12,6 +12,7 @@ config-dotfiles/
 ├── ghostty/.config/ghostty/config
 ├── ghostty/.config/ghostty/shaders/cursor.glsl
 ├── zsh/.zshrc
+├── bash/.bashrc + bash/.bash_profile
 ├── vscode/Library/Application Support/Code/User/settings.json
 └── setup/peripherals/          # note di riferimento, non un pacchetto stow
 ```
@@ -28,7 +29,7 @@ brew install stow
 cd ~
 git clone https://github.com/DePoli97/config-dotfiles.git
 cd ~/config-dotfiles
-stow -t ~ nvim tmux ghostty zsh vscode
+stow -t ~ nvim tmux ghostty zsh bash vscode
 ```
 
 This creates symlinks from the expected config locations to the files in this repo.
