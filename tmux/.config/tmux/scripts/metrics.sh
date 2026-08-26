@@ -45,10 +45,10 @@ elif [[ "$os_name" == "Linux" ]]; then
   fi
 fi
 
-ram_display="--/--GiB"
+ram_display="--/-- GiB"
 
 if [[ "$ram_used_gb" != "--" && "$ram_total_gb" != "--" ]]; then
-  ram_display="${ram_used_gb}/${ram_total_gb}GiB"
+  ram_display="${ram_used_gb}/${ram_total_gb} GiB"
 fi
 
 printf "  %s" "$ram_display"
