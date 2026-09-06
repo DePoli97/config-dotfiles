@@ -106,9 +106,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Plain prompt with high contrast and git branch info.
-# Il path usa %F{10} (bright green della palette) invece di un indice 256
-# fisso, cosi' segue il tema del terminale. user@host e il branch usano
-# ancora indici 256 (81 e 39): quelli non cambiano col tema.
+# Stessi colori del prompt Ubuntu di default: user@host bold verde, path
+# bold blu. Con bold-color = bright in Ghostty rendono nelle varianti
+# brillanti, come in una sessione ssh su Linux.
 setopt PROMPT_SUBST
 
 git_branch_prompt() {
@@ -123,8 +123,8 @@ git_branch_prompt() {
     echo " %F{39}(${branch}${dirty})%f"
 }
 
-PROMPT='%F{10}%~%f$(git_branch_prompt)
-%F{81}%n@%m%f %# '
+PROMPT='%B%F{4}%~%f%b$(git_branch_prompt)
+%B%F{2}%n@%m%f%b %# '
 
 # exports
 export PATH="/Users/paolodeidda/.pixi/bin:$PATH"
@@ -197,3 +197,4 @@ alias hpc2='cd /Users/paolodeidda/Documents/UNI/Master/sem4/HPC2'
 alias cscs='/Users/paolodeidda/Documents/UNI/Master/sem4/HPC2/mio/scripts/cscs-refresh.sh'
 # entra su daint direttamente nella scratch del corso
 alias ds='ssh -t daint "cd \$SCRATCH/SummerSchool && exec bash -l"'
+alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
