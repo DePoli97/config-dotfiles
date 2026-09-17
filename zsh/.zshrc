@@ -200,8 +200,3 @@ alias cscs='/Users/paolodeidda/Documents/UNI/Master/sem4/HPC2/mio/scripts/cscs-r
 alias ds='ssh -t daint "cd \$SCRATCH/SummerSchool && exec bash -l"'
 alias hpc='cd ~/Documents/UNI/Master/sem4/HPC2'
 alias conf="cd ~/config-dotfiles/"
-CSS
-  pandoc "$1" -s --embed-resources --css "$css" \
-    --resource-path="$(dirname "$1")" --metadata title="$(basename "$1")" \
-    -o "$out" && open "$out"
-}
