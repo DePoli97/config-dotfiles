@@ -151,6 +151,7 @@ unset __conda_setup
 alias sem='cd ~/Documents/UNI/Master/sem4'
 alias dwn='cd /Users/paolodeidda/Downloads'
 alias tesi='cd ~/Documents/UNI/Master/Tesi/'
+alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
 alias pms='cd ~/Documents/Work/Custodia/'
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH=$PATH:$HOME/Downloads/pulp-riscv-gnu-toolchain/install/bin
@@ -197,4 +198,28 @@ alias hpc2='cd /Users/paolodeidda/Documents/UNI/Master/sem4/HPC2'
 alias cscs='/Users/paolodeidda/Documents/UNI/Master/sem4/HPC2/mio/scripts/cscs-refresh.sh'
 # entra su daint direttamente nella scratch del corso
 alias ds='ssh -t daint "cd \$SCRATCH/SummerSchool && exec bash -l"'
-alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
+alias hpc='cd ~/Documents/UNI/Master/sem4/HPC2'
+alias conf="cd ~/config-dotfiles/"
+
+# Anteprima markdown nel browser senza aprire nvim: mdp file.md
+mdp() {
+  [[ -f "$1" ]] || { echo "uso: mdp file.md"; return 1; }
+  local out="${TMPDIR:-/tmp}/mdp-$(basename "${1%.*}").html"
+  local css="${TMPDIR:-/tmp}/mdp.css"
+  cat > "$css" <<'CSS'
+body { max-width: 900px; margin: 2rem auto; padding: 0 1rem; font: 16px/1.6 -apple-system, sans-serif; }
+table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+th, td { border-bottom: 1px solid #ddd; padding: .5rem .75rem; text-align: left; vertical-align: top; }
+th { border-bottom: 2px solid #999; }
+code { background: #f3f3f3; padding: .1rem .3rem; border-radius: 3px; }
+pre code { display: block; padding: .75rem; overflow-x: auto; }
+@media (prefers-color-scheme: dark) {
+  body { background: #1e1e1e; color: #ddd; }
+  th, td { border-color: #444; } th { border-color: #777; }
+  code { background: #2d2d2d; }
+}
+CSS
+  pandoc "$1" -s --embed-resources --css "$css" \
+    --resource-path="$(dirname "$1")" --metadata title="$(basename "$1")" \
+    -o "$out" && open "$out"
+}
