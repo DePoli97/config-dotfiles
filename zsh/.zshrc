@@ -192,7 +192,3 @@ alias conf="cd ~/config-dotfiles/"
 alias doc='cd ~/Documents'
 alias life='cd ~/Documents/Lifeware_Smalltalk'
 alias drive='cd /Users/paolodeidda/Library/CloudStorage/GoogleDrive-paolodeidda.97@gmail.com/My\ Drive'
-
-# claude riprende l'ultima conversazione di questa cartella.
-# Per una sessione nuova: \claude
-alias claude='claude --continue'
