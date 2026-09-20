@@ -192,3 +192,22 @@ alias conf="cd ~/config-dotfiles/"
 alias doc='cd ~/Documents'
 alias life='cd ~/Documents/Lifeware_Smalltalk'
 alias drive='cd /Users/paolodeidda/Library/CloudStorage/GoogleDrive-paolodeidda.97@gmail.com/My\ Drive'
+
+# 'claude' riprende l'ultima conversazione di questa cartella (claude -c).
+# Se qui non c'e' ancora nessuna conversazione parte normalmente, cosi' non
+# si accumulano sessioni vuote. Per forzarne una nuova: claude --new
+claude() {
+  if [[ "$1" == "--new" ]]; then
+    shift
+    command claude "$@"
+    return
+  fi
+  local hist="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/projects/${PWD//\//-}"
+  local -a convs
+  convs=("$hist"/*.jsonl(N))
+  if [[ $# -eq 0 && ${#convs} -gt 0 ]]; then
+    command claude --continue
+  else
+    command claude "$@"
+  fi
+}
