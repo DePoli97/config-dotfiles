@@ -157,19 +157,8 @@ export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH=$PATH:$HOME/Downloads/pulp-riscv-gnu-toolchain/install/bin
 export PATH="/opt/homebrew/bin:$PATH"
 
-# Auto-start tmux only in Ghostty local interactive shells.
-# Si riattacca alla sessione staccata piu' recente; se non ce n'e' nessuna, ne crea una nuova.
-# Le sessioni gia' attaccate vengono ignorate, cosi' due finestre non mostrano la stessa cosa.
-if [[ -o interactive && -z "$TMUX" && -z "$SSH_CONNECTION" && "${AUTO_TMUX:-1}" == "1" && "$TERM_PROGRAM" == "ghostty" ]]; then
-    _tmux_session=$(tmux list-sessions -F '#{session_attached} #{session_last_attached} #{session_name}' 2>/dev/null \
-        | awk '$1 == 0' | sort -k2 -nr | head -1 | cut -d' ' -f3-)
-    if [[ -n "$_tmux_session" ]]; then
-        tmux attach-session -t "$_tmux_session"
-    else
-        tmux new-session
-    fi
-    unset _tmux_session
-fi
+# tmux non parte piu' da solo: si lancia a mano con 'tmux' o
+# 'tmux attach' per riprendere una sessione gia' esistente.
 
 
 
@@ -200,3 +189,6 @@ alias cscs='/Users/paolodeidda/Documents/UNI/Master/sem4/HPC2/mio/scripts/cscs-r
 alias ds='ssh -t daint "cd \$SCRATCH/SummerSchool && exec bash -l"'
 alias hpc='cd ~/Documents/UNI/Master/sem4/HPC2'
 alias conf="cd ~/config-dotfiles/"
+alias doc='cd ~/Documents'
+alias life='cd ~/Documents/Lifeware_Smalltalk'
+alias drive='cd /Users/paolodeidda/Library/CloudStorage/GoogleDrive-paolodeidda.97@gmail.com/My\ Drive'
